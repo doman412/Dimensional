@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="15" tilewidth="64" tileheight="64" backgroundcolor="#7e8079">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png" width="512" height="512"/>
+  <tile id="48">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="background" width="30" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA7NmYGCwHsWjeBRThA0HgRtG8SgexeRhALRgOoUIBwAA
+  </data>
+ </layer>
+ <layer name="uni 1" width="30" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBQMVWA4QHbS0l5DNDY6piVAtoOe9mJzw1Cw15gC+4yw2IkP43InPrcSazYAqXzSiggHAAA=
+  </data>
+ </layer>
+ <objectgroup name="info" width="30" height="15">
+  <object name="start" x="171" y="838" width="76" height="54">
+   <properties>
+    <property name="player" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="30" height="15">
+  <object name="sign" type="sign" x="644" y="836" width="55" height="58">
+   <properties>
+    <property name="text" value="use sprint to clear the gap."/>
+    <property name="uni" value="1"/>
+   </properties>
+  </object>
+  <object name="door" type="door" x="1607" y="834" width="49" height="61">
+   <properties>
+    <property name="next" value="0002"/>
+    <property name="uni" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
