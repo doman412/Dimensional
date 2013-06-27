@@ -49,6 +49,7 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 
 	private HUD hud;
 
+	private OverlayParam pauseParams = new OverlayParam();
 	
 	public Level(){
 		world = new World(new Vector2(0,-9.8f), false);
@@ -65,10 +66,18 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 		
 		PauseMenu pauseMenu = new PauseMenu();
 		hud.addOverlay("pause", pauseMenu);
+		pauseParams.put("unpause", unpauseCallback);
 		
 		SignOverlay sign = new SignOverlay();
 		hud.addOverlay("sign", sign);
 	}
+	
+	private ActionCallback unpauseCallback = new ActionCallback() {
+		@Override
+		public void callback(ActionBundle b) {
+			Level.this.paused = false;
+		}
+	};
 	
 	public Rectangle getBounds(){
 		return this.bounds;
@@ -96,7 +105,7 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 
 	@Override
 	public void down(int dir) {
-		Gdx.app.log(tag, "down");
+//		Gdx.app.log(tag, "down");
 	}
 
 	@Override
@@ -190,8 +199,12 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 	@Override
 	public void ps(int dir) {
 		// pause menu
-		if(dir==0)
+		
+		if(dir==1){
 			paused = !paused;
+			if(paused)
+				hud.show("pause", pauseParams);
+		}
 	}
 	
 	@Override

@@ -84,5 +84,12 @@ public class HUD {
 		overlays.get(key).onHide();
 	}
 
+	public static void begin(SpriteBatch batch) {
+		batch.setProjectionMatrix(HUD.hudMatrix);
+	}
+
+	public static void end(SpriteBatch batch) {
+		batch.setProjectionMatrix(HUD.camera.combined);
+	}
 }
 

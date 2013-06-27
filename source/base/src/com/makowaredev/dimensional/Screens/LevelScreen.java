@@ -71,9 +71,8 @@ public class LevelScreen implements Screen {
 		this.level = new Level();
 		this.level.loadBundle(LevelLoader.load("0001.tmx"));
 //		this.level.loadBundle(LevelLoader.load("0002.tmx"));
+		
 		DimGame.input.setService(level);
-		
-		
 		
 		
 		this.batch = new SpriteBatch();

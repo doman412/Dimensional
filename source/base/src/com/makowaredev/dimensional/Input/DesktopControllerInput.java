@@ -3,12 +3,18 @@ package com.makowaredev.dimensional.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
 
 public class DesktopControllerInput implements InputMethod {
 	public String tag = "DesktopControllerInput";
 	private ControllerService cont;
+	private Controller c;
+	
+	public enum Conts{
+		Sony
+	}
 
 	public DesktopControllerInput(ControllerService cont){
 		Gdx.app.log(tag, tag);
@@ -16,6 +22,22 @@ public class DesktopControllerInput implements InputMethod {
 	}
 	
 	public DesktopControllerInput() {
+//		for(Controller c : Controllers.getControllers()){
+//			
+//			if(c.getName().contains("Sony")){
+//				
+//			}
+//		}
+//		if(Controllers.getControllers().size>0)
+//			c = Controllers.getControllers().first();
+//		
+//		switch( Conts.valueOf( c.getName().substring(0, 5) ) ){
+//		default:
+//		case Sony:
+//			Gdx.app.log(tag, "Sony");
+//			break;
+//		}
+		
 	}
 
 	@Override
