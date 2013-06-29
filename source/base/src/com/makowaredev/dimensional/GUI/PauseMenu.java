@@ -3,15 +3,22 @@ package com.makowaredev.dimensional.GUI;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.makowaredev.dimensional.Input.ControllerService;
 import com.makowaredev.dimensional.Misc.Callback;
+import com.makowaredev.dimensional.Misc.Message;
 import com.makowaredev.dimensional.Objects.ActionCallback;
 
 public class PauseMenu extends Overlay implements ControllerService {
-
+	public static String tag = "PauseMenu";
 	private ArrayList<PauseMenuItem> menuItems;
+	private int itemIndex = 0;
+	
+	public static float X = 0.3f;
+	public static float W = 1.0f-(2*X);
+	public static float Y = 0.25f;
+	public static float H = 1.0f-(2*Y);
+	
 
 	public PauseMenu(){
 		this(true);
@@ -21,19 +28,20 @@ public class PauseMenu extends Overlay implements ControllerService {
 		super(requestInput);
 		menuItems = new ArrayList<PauseMenuItem>();
 		
-		menuItems.add(new PauseMenuItem(0,"hello world",null));
+		
 	}
 
 	@Override
 	public void draw(SpriteBatch batch){
 		HUD.begin(batch);
 		
-		HUD.nine.draw(batch, 0.375f*Gdx.graphics.getWidth(), 0.25f*Gdx.graphics.getHeight(), 0.25f*Gdx.graphics.getWidth(), 0.5f*Gdx.graphics.getHeight());
+		HUD.nine.draw(batch, X*Gdx.graphics.getWidth(), Y*Gdx.graphics.getHeight(), W*Gdx.graphics.getWidth(), H*Gdx.graphics.getHeight());
 		
 		for(PauseMenuItem i : menuItems){
 			i.draw(batch);
 		}
 		
+//		Gdx.app.log(tag, "w="+Gdx.graphics.getWidth()+" h="+Gdx.graphics.getHeight());
 //		HUD.nine.draw(batch, 0.5f*Gdx.graphics.getWidth(), 0.5f*Gdx.graphics.getHeight(), 0.5f*Gdx.graphics.getWidth(), 0.5f*Gdx.graphics.getHeight());
 		
 		HUD.end(batch);
@@ -41,10 +49,24 @@ public class PauseMenu extends Overlay implements ControllerService {
 
 	@Override
 	public void up(int dir) {
+		if(dir==0){
+			menuItems.get(itemIndex ).deactivate();
+			this.itemIndex--;
+			if(this.itemIndex<0)
+				this.itemIndex++;
+			menuItems.get(itemIndex).activate();
+		}
 	}
 
 	@Override
 	public void down(int dir) {
+		if(dir==0){
+			menuItems.get(itemIndex ).deactivate();
+			this.itemIndex++;
+			if(this.itemIndex>=menuItems.size())
+				this.itemIndex--;
+			menuItems.get(itemIndex).activate();
+		}
 	}
 
 	@Override
@@ -93,10 +115,13 @@ public class PauseMenu extends Overlay implements ControllerService {
 
 	@Override
 	public void circle(int dir) {
+		ps(dir);
 	}
 
 	@Override
 	public void cross(int dir) {
+		if(dir==0)
+			menuItems.get(itemIndex).action();
 	}
 
 	@Override
@@ -115,7 +140,7 @@ public class PauseMenu extends Overlay implements ControllerService {
 
 	@Override
 	public void ps(int dir) {
-		if(dir==1){
+		if(dir==0){
 			hide();
 		}
 	}
@@ -123,30 +148,45 @@ public class PauseMenu extends Overlay implements ControllerService {
 	@Override
 	public void onHide() {
 		super.onHide();
-		params.get("unpause", ActionCallback.class).callback(null);
+		params.get("unpause", ActionCallback.class).actionCallback(null);
+		menuItems.clear();
 	}
 	
-	public class PauseMenuItem {
+	@Override
+	public void onShow(OverlayParam p) {
+		super.onShow(p);
+		int index = 0;
+		itemIndex = 0;
 		
-		private Callback cb;
-		private int index;
-		private String text;
+		if(!p.contains("gameover") || !p.get("gameover", Boolean.class)){
+			menuItems.add(new PauseMenuItem(index++,"Resume",new Callback() {
+				
+				@Override
+				public void call(Message m) {
+//					Gdx.app.log(tag, "resume from menu");
+					PauseMenu.this.hide();
+				}
+			}));
+		}
+		
+		menuItems.add(new PauseMenuItem(index++,"Restart",new Callback() {
+			
+			@Override
+			public void call(Message m) {
+//				Gdx.app.log(tag, "restart from menu");
+				PauseMenu.this.params.get("restart", Callback.class).call(null);
+			}
+		}));
+		
+		menuItems.add(new PauseMenuItem(index++,"Quit",new Callback(){
 
-		public PauseMenuItem(int index, String text, Callback cb){
-			this.cb = cb;
-			this.index = index;
-			this.text = text;
-		}
-		
-		public void action(){
-			cb.call(null);
-		}
-		
-		public void draw(SpriteBatch batch){
-			HUD.font.setColor(Color.WHITE);
-			HUD.font.drawWrapped(batch, text, 0.414f*Gdx.graphics.getWidth(), (0.736f-(0.04f*0))*Gdx.graphics.getHeight(), 0.4f*Gdx.graphics.getWidth());
-			HUD.font.drawWrapped(batch, text, 0.414f*Gdx.graphics.getWidth(), (0.736f-(0.04f*1))*Gdx.graphics.getHeight(), 0.4f*Gdx.graphics.getWidth());
-		}
+			@Override
+			public void call(Message m) {
+				Gdx.app.exit();
+			}
+			
+		}));
 	}
+	
 
 }

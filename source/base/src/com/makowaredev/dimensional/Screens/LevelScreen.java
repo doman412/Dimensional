@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.makowaredev.dimensional.DimGame;
+import com.makowaredev.dimensional.GUI.HUD;
 import com.makowaredev.dimensional.GUI.MCamera;
 import com.makowaredev.dimensional.Misc.Level;
 import com.makowaredev.dimensional.Misc.LevelLoader;
@@ -106,6 +107,9 @@ public class LevelScreen implements Screen {
 //		Door.tex.dispose();
 //		Sign.tex.dispose();
 		Player.tex.dispose();
+		HUD.arrow.dispose();
+		HUD.font.dispose();
+		HUD.nine.getTexture().dispose();
 //		Platform.tex.dispose();
 	}
 

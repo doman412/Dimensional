@@ -58,6 +58,6 @@ public class Door extends ActionableEntity {
 //		Gdx.app.log(tag, "go to next level");
 		ActionBundle b = new ActionBundle(aType);
 		b.putString("next", next);
-		cb.callback(b);
+		cb.actionCallback(b);
 	}
 }

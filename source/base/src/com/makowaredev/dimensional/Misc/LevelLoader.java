@@ -147,7 +147,7 @@ public class LevelLoader {
 		Gdx.app.log(tag, "Start: "+start);
 		
 		final LevelBundle bundle = new LevelBundle();
-		
+		bundle.setLevelName(name.split("/")[1]);
 		TiledMap map = new TmxMapLoader().load(name);
 		MapLayers layers = map.getLayers();
 		

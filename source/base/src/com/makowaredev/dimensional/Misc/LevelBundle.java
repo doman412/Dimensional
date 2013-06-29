@@ -13,6 +13,7 @@ public class LevelBundle {
 	private ArrayList<Universe> unis;
 	private int uniIndex;
 	private Vector2 playerPos;
+	private String levelName;
 	
 	private HashMap<String, Object> extras;
 	
@@ -30,6 +31,14 @@ public class LevelBundle {
 	
 	public Rectangle getBounds() {
 		return this.bounds;
+	}
+	
+	public void setLevelName(String name){
+		this.levelName = name;
+	}
+	
+	public String getLevelName(){
+		return levelName;
 	}
 	
 	public void setPlayerPos(Vector2 pos){

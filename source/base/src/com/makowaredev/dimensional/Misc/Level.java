@@ -67,14 +67,17 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 		PauseMenu pauseMenu = new PauseMenu();
 		hud.addOverlay("pause", pauseMenu);
 		pauseParams.put("unpause", unpauseCallback);
+		pauseParams.put("restart", restart);
 		
 		SignOverlay sign = new SignOverlay();
 		hud.addOverlay("sign", sign);
 	}
 	
+	
+	
 	private ActionCallback unpauseCallback = new ActionCallback() {
 		@Override
-		public void callback(ActionBundle b) {
+		public void actionCallback(ActionBundle b) {
 			Level.this.paused = false;
 		}
 	};
@@ -200,10 +203,12 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 	public void ps(int dir) {
 		// pause menu
 		
-		if(dir==1){
+		if(dir==0){
 			paused = !paused;
-			if(paused)
+			if(paused){
 				hud.show("pause", pauseParams);
+//				player.stop();
+			}
 		}
 	}
 	
@@ -293,7 +298,7 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 	}
 	
 	@Override
-	public void callback(ActionBundle b) {
+	public void actionCallback(ActionBundle b) {
 		switch(b.type){
 		case DOOR:
 //			Gdx.app.log(tag, "aType:DOOR; load new bundle");
@@ -316,7 +321,27 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 	public void gameover(){
 		Gdx.app.log(tag, "Game Over");
 		gameover = true;
+		pauseParams.put("gameover", new Boolean(gameover));
+		hud.show("pause", pauseParams);
 	}
+	
+	private Callback restart = new Callback(){
+
+		@Override
+		public void call(Message m) {
+			// TODO restart
+			Gdx.app.log(tag, "restart here");
+			
+			currentUniverse().unpopulate();
+			mapper.dispose();
+			mapper = null;
+			loadBundle(LevelLoader.load(bundle.getLevelName()));
+			play();
+			hud.hide("pause");
+			gameover = false;
+		}
+		
+	};
 	
 	public void play(){
 		if(unis.size()>0){

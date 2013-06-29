@@ -57,7 +57,7 @@ public class Sign extends ActionableEntity{
 //		Gdx.app.log(tag, text);
 		ActionBundle b = new ActionBundle(aType);
 		b.putString("text", text);
-		cb.callback(b);
+		cb.actionCallback(b);
 	}
 
 }

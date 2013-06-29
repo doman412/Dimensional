@@ -34,14 +34,18 @@ public class HUD {
 	public static BitmapFont font;
 	private Texture fontTex;
 	
+	public static Texture arrow = new Texture("data/gfx/arrow.png");
+	static{
+		arrow.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+	}
 	
 	public HUD(){
 		this.overlays = new HashMap<String,Overlay>();
 		this.list = new ArrayList<String>();
 		
-		fontTex = new Texture(Gdx.files.internal("data/font/silkscreen_10.png"));
+		fontTex = new Texture(Gdx.files.internal("data/font/silkscreen_25.png"));
 		fontTex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		font = new BitmapFont(Gdx.files.internal("data/font/silkscreen_10.fnt"), new TextureRegion(fontTex), false);
+		font = new BitmapFont(Gdx.files.internal("data/font/silkscreen_25.fnt"), new TextureRegion(fontTex), false);
 //		this.font.setScale(0.1f);
 //		font.setScale(0.1f, 0.1f);
 		font.setColor(Color.BLACK);
@@ -75,7 +79,8 @@ public class HUD {
 	}
 	
 	public void show(String key, OverlayParam p){
-		list.add(key);
+		if(!overlays.get(key).isVisible())
+			list.add(key);
 		overlays.get(key).onShow(p);
 	}
 	

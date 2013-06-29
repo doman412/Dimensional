@@ -3,6 +3,6 @@ package com.makowaredev.dimensional.Objects;
 
 public interface ActionCallback {
 	
-	public void callback(ActionBundle b);
+	public void actionCallback(ActionBundle b);
 
 }

@@ -244,10 +244,13 @@ public class Player extends Entity{
 
 	public void moveTo(Vector2 playerPos) {
 		this.body.setTransform(playerPos, body.getAngle());
+		this.body.setLinearVelocity(0, 0);
+		this.vector.x = 0;
 	}
 
 	public void stop(){
 //		body.setLinearVelocity(vX, vY)
+		this.vector.x = 0;
 	}
 
 	

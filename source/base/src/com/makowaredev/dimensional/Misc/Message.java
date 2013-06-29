@@ -10,6 +10,10 @@ public class Message {
 		things.put(key, obj);
 	}
 	
+	public boolean contains(String key){ 
+		return things.containsKey(key); 
+	}
+	
 	public Object get(String key){
 		return things.get(key);
 	}
@@ -17,5 +21,5 @@ public class Message {
 	public <T> T get(String key, Class<T> c){
 		return (T)(things.get(key));
 	}
-
+	
 }
