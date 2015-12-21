@@ -163,7 +163,7 @@ public class LevelLoader {
 				bundle.addUniverse(new Universe(layer.getName().split(" ")[1]));
 				bundle.getLastUniverse().setRenderLayers(new int[]{0,i});
 				TiledMapTileLayer l = (TiledMapTileLayer)layer;
-				bundle.setBounds(0, 0, l.getWidth(), l.getHeight());
+				bundle.setBounds(1, 0, l.getWidth()-2, l.getHeight()-1);
 				
 				for(int row=0; row<l.getHeight(); row++){
 					int min = 999;

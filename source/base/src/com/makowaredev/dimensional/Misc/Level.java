@@ -73,15 +73,6 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 		hud.addOverlay("sign", sign);
 	}
 	
-	
-	
-	private ActionCallback unpauseCallback = new ActionCallback() {
-		@Override
-		public void actionCallback(ActionBundle b) {
-			Level.this.paused = false;
-		}
-	};
-	
 	public Rectangle getBounds(){
 		return this.bounds;
 	}
@@ -204,13 +195,24 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 		// pause menu
 		
 		if(dir==0){
-			paused = !paused;
-			if(paused){
-				hud.show("pause", pauseParams);
-//				player.stop();
-			}
+			pause();
 		}
 	}
+	
+	public void pause(){
+		paused = !paused;
+		if(paused){
+			hud.show("pause", pauseParams);
+//			player.stop();
+		}
+	}
+	
+	private ActionCallback unpauseCallback = new ActionCallback() {
+		@Override
+		public void actionCallback(ActionBundle b) {
+			Level.this.paused = false;
+		}
+	};
 	
 	@Override
 	public void beginContact(Contact contact){
@@ -339,6 +341,7 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 			play();
 			hud.hide("pause");
 			gameover = false;
+			pauseParams.put("gameover", new Boolean(gameover));
 		}
 		
 	};
@@ -372,6 +375,7 @@ public class Level implements ContactListener, ControllerService, ActionCallback
 	public void loadBundle(LevelBundle bundle) {
 		this.bundle = bundle;
 		this.bounds = bundle.getBounds();
+		LevelScreen.camera.setBounds(bounds);
 		this.unis = bundle.getUnis();
 		this.uniIndex = 0;
 		this.player.moveTo(bundle.getPlayerPos());

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="35" height="20" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" source="tileset.tsx"/>
+ <layer name="background" width="35" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3DAQkAAAwEoev1/Xutx1Bw1VRV9ekDo6E0ZPAKAAA=
+  </data>
+ </layer>
+ <layer name="uni 1" width="35" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+WVOw7AMAhDuVI69/7n6l61BH9QUnXwkgjxYhwxImJspPOmp7PKnSKEr1Kj+LDaly+yvM3r775k9ZWMsyyzfM+4VvmS+dTFgs6CYUJ9ceYj40ZmpDBV946aF7Z3Fwu6z5wszLtdLEpvB0vH/2FZDmN/hGUXXSsDa5LwCgAA
+  </data>
+ </layer>
+ <layer name="uni 2" width="35" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2UMQ4AIAgD+RK7/3+XOzFopSCDQxOjwZ5VURHRRhpGq7kMqRkjLJk5ICzqrL3IpYLl5A1VsXTKZed3mll1Lkx9lr4s0V7H8vY8M1iQfuXV3PzbaL2XS9Q7kwU9N5OFcWdMFnQvFksXTSMvWKnwCgAA
+  </data>
+ </layer>
+ <objectgroup name="info" width="35" height="20">
+  <object name="start" x="110" y="85" width="34" height="38"/>
+ </objectgroup>
+ <objectgroup name="objects" width="35" height="20">
+  <object name="door" type="door" x="391" y="1157" width="50" height="50">
+   <properties>
+    <property name="next" value="0003"/>
+    <property name="uni" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

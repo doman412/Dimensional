@@ -70,7 +70,7 @@ public class LevelScreen implements Screen {
 
 		camera = new MCamera();
 		this.level = new Level();
-		this.level.loadBundle(LevelLoader.load("0001.tmx"));
+		this.level.loadBundle(LevelLoader.load("0003.tmx"));
 //		this.level.loadBundle(LevelLoader.load("0002.tmx"));
 		
 		DimGame.input.setService(level);
